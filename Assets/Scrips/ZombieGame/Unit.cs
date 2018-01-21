@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
-    public float actions = 5;
-    float distanceTravelled = 0;
-    Vector3 lastPos;
-
+    public Vector3 oldPosition;
     public Transform target;
-    public float speed = 5f;
+    public float speed = 1f;
     Vector3[] path;
     int targetIndex;  
 
-    void  Update() {
-        //lastPos = transform.position;
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+    void Start() {
+        oldPosition = target.position;
+        PathRequestManager.RequestPath(transform.position, oldPosition, OnPathFound);
+    }
+
+    void  LateUpdate() {
+        //lastPos = transform.position
+        if(target.position != oldPosition) {
+            path = null;
+            oldPosition = target.position;
+            PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        }
+            
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccess) {
