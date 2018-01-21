@@ -1,0 +1,2 @@
+AI is going after the ball with smallest dist, but this this is also diagonal
+  - Make the AI better
