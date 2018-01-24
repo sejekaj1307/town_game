@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Z_Movement : MonoBehaviour {
     public float speed = 6.0F;
+    public float turnSpeed = 10F;
     public float jumpSpeed = 100F;
     public float gravity = 20.0F;
     private Vector3 moveDirection = Vector3.zero;
@@ -36,7 +37,7 @@ public class Z_Movement : MonoBehaviour {
         transform.position = transform.position + (moveDirection * Time.deltaTime);
 
         Vector3 targetDir = (moveDirection+transform.position) - transform.position;
-        float step = speed * Time.deltaTime;
+        float step = speed * Time.deltaTime*turnSpeed;
         Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
         Debug.DrawRay(transform.position, newDir, Color.red);
         transform.rotation = Quaternion.LookRotation(newDir);

@@ -39,7 +39,7 @@ public class Unit : MonoBehaviour {
         //Ellers skal vi have en metode som kan tracke antallet af noder den går over
         Vector3 currentWaypoint = path[0];
         while (true) {
-            Debug.Log(currentWaypoint);
+            //Debug.Log(currentWaypoint);
             if (transform.position == currentWaypoint) {
                 targetIndex++;
                 if (targetIndex >= path.Length) {
