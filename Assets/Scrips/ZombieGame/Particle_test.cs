@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[ExecuteInEditMode]
 public class Particle_test : MonoBehaviour
 {
-    public GameObject zombie;
-    private Enemy_hit enemey_hit;
     //private 
     ParticleSystem ps;
 
@@ -17,16 +14,31 @@ public class Particle_test : MonoBehaviour
 
     void OnEnable()
     {
-        enemey_hit = zombie.GetComponent<Enemy_hit>();
         ps = GetComponent<ParticleSystem>();
     }
+    
 
-    void OnParticleTrigger()
+    private void OnParticleCollision(GameObject other)
+    {
+        // initialize an array the size of our current particle count
+        ParticleSystem.Particle[] particles = new ParticleSystem.Particle[ps.particleCount];
+        // *pass* this array to GetParticles...
+        int num = ps.GetParticles(particles);
+        Debug.Log("Found " + num + " active particles.");
+        for (int i = 0; i < num; i++)
+        {
+            if(other.CompareTag("Enemy"))  // negative x: make it die
+                particles[i].remainingLifetime = 0;
+        }
+        // re-assign modified array
+        ps.SetParticles(particles, num);
+    }
+
+   /* void OnParticleTrigger()
     {
         // get the particles which matched the trigger conditions this frame
         int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
         int numExit = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
-
 
         // iterate through the particles which entered the trigger and make them red
         for (int i = 0; i < numEnter; i++)
@@ -48,5 +60,5 @@ public class Particle_test : MonoBehaviour
         // re-assign the modified particles back into the particle system
         ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
         ps.SetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
-    }
+    }*/
 }
