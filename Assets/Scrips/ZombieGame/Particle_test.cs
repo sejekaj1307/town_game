@@ -17,6 +17,7 @@ public class Particle_test : MonoBehaviour
     {
         ps = GetComponent<ParticleSystem>();
         ps.Stop();
+        WeaponType(2,1,1,0.1f);
     }
 
     private void Update()
@@ -26,6 +27,10 @@ public class Particle_test : MonoBehaviour
         transform.position = player.position + Vector3.Scale(player.forward,new Vector3(0.5f,0f,0.5f)) + new Vector3(0f,0.5f,0f);
     }
 
+    private void WeaponType(int cycles,short minShots,short maxShots,float interval)
+    {
+        ps.emission.SetBursts(new ParticleSystem.Burst[] { new ParticleSystem.Burst(0.0f, minShots, maxShots, cycles ,interval)});
+    }
 
     private void OnParticleCollision(GameObject other)
     {
@@ -36,7 +41,7 @@ public class Particle_test : MonoBehaviour
         Debug.Log("Found " + num + " active particles.");
         for (int i = 0; i < num; i++)
         {
-            if(other.CompareTag("Enemy"))  // negative x: make it die
+            if(!other.CompareTag("Player"))  // negative x: make it die
                 particles[i].remainingLifetime = 0;
         }
         // re-assign modified array

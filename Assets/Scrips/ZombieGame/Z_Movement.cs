@@ -9,6 +9,7 @@ public class Z_Movement : MonoBehaviour {
     public float jumpSpeed = 100F;
     public float gravity = 20.0F;
     private Vector3 moveDirection = Vector3.zero;
+    Vector3 newDir;
     private Rigidbody rb;
     private bool canJump = false;
     float x_in;
@@ -19,13 +20,15 @@ public class Z_Movement : MonoBehaviour {
     }
     void Update () {
         move();
+        if (transform.position.y < -0.05) transform.position = new Vector3(transform.position.x,-0.045f,transform.position.z);
 	}
 
     void move()
     {
+        x_in = Input.GetAxis("Horizontal");
+        z_in = Input.GetAxis("Vertical");
         if (canJump) {
-            x_in = Input.GetAxis("Horizontal");
-            z_in = Input.GetAxis("Vertical");
+            
             moveDirection = new Vector3(x_in, 0, z_in);
         }
         else { moveDirection = new Vector3(x_in, 0, z_in); }
@@ -38,7 +41,7 @@ public class Z_Movement : MonoBehaviour {
 
         Vector3 targetDir = (moveDirection+transform.position) - transform.position;
         float step = speed * Time.deltaTime*turnSpeed;
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow)) { newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F); }
         Debug.DrawRay(transform.position, newDir, Color.red);
         transform.rotation = Quaternion.LookRotation(newDir);
     }
