@@ -4,6 +4,8 @@ using UnityEngine;
 
 
 public class Enemy_hit : MonoBehaviour {
+
+    public GameObject player;
     public int lives = 100;
     private Rigidbody rb;
 	// Use this for initialization
@@ -13,12 +15,13 @@ public class Enemy_hit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print(lives);	
+        print(lives);
+        transform.LookAt(player.transform);
 	}
 
     private void OnParticleCollision(GameObject other)
     {
-        rb.AddForce(transform.right * 100f);
+        rb.AddForce(-transform.forward * 100f);
         lives--;
 
     }
