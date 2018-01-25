@@ -5,6 +5,7 @@ using UnityEngine;
 public class Particle_test : MonoBehaviour
 {
     public Transform player;
+    public Transform pos;
     public const string path = "items";
 
     //private 
@@ -26,7 +27,11 @@ public class Particle_test : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0)) { ps.Play(); }
         transform.rotation = player.rotation;
-        transform.position = player.position + Vector3.Scale(player.forward,new Vector3(0.5f,0f,0.5f)) + new Vector3(0f,0.5f,0f);
+        //old chef
+        //transform.position = player.position + Vector3.Scale(player.forward,new Vector3(0.5f,0f,0.5f)) + new Vector3(0f,0.5f,0f);
+
+        //new chef
+        transform.position = pos.position;
     }
 
     void GetWeaponValues(string weapon)
