@@ -15,7 +15,8 @@ public class Enemy_hit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print(lives);
+        //die method
+        if (lives <= 0) { Destroy(gameObject); }
         transform.LookAt(player.transform);
 	}
 

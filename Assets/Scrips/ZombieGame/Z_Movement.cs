@@ -14,6 +14,9 @@ public class Z_Movement : MonoBehaviour {
     private bool canJump = false;
     float x_in;
     float z_in;
+
+    public float offset = 0.0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -21,6 +24,7 @@ public class Z_Movement : MonoBehaviour {
     void Update () {
         move();
         if (transform.position.y < -0.05) transform.position = new Vector3(transform.position.x,-0.045f,transform.position.z);
+        
 	}
 
     void move()
@@ -43,7 +47,18 @@ public class Z_Movement : MonoBehaviour {
         float step = speed * Time.deltaTime*turnSpeed;
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow)) { newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F); }
         Debug.DrawRay(transform.position, newDir, Color.red);
-        transform.rotation = Quaternion.LookRotation(newDir);
+        //transform.rotation = Quaternion.LookRotation(newDir);
+        PlayerRotation();
+    }
+
+    void PlayerRotation()
+    {
+        Camera c = Camera.main;
+        Vector3 dirrection = new Vector3((Input.mousePosition.x - c.pixelWidth / 2) / c.pixelWidth,0f,(Input.mousePosition.y - c.pixelHeight / 2) / c.pixelHeight);
+        //print((Input.mousePosition.x - c.pixelWidth / 2) / c.pixelWidth + " " + (Input.mousePosition.y - c.pixelHeight / 2) / c.pixelHeight);
+        //print(dirrection);
+        Vector3 test1 = Vector3.RotateTowards(transform.position, dirrection + transform.position, 20f*Time.deltaTime, 0.0F);
+        transform.LookAt(dirrection + transform.position);
     }
 
     void OnCollisionStay(Collision col)

@@ -68,13 +68,13 @@ public class CameraOrbit : MonoBehaviour {
                 RaycastHit hit;
                 if (Physics.Linecast(target.transform.position, transform.position, out hit))
                 {
-                    distance -= hit.distance;
+                    //distance -= hit.distance;
                 }
                 Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
                 Vector3 position = rotation * negDistance + target.transform.position;
 
                 transform.rotation = rotation;
-                target.transform.rotation = Quaternion.Euler(0, x, 0); ;
+                //target.transform.rotation = Quaternion.Euler(0, x, 0); ;
                 transform.position = position;  
             }
     }
