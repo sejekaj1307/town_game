@@ -20,7 +20,7 @@ public class Particle_test : MonoBehaviour
     {
         ps = GetComponent<ParticleSystem>();
         ps.Stop();
-        GetWeaponValues("Clock");
+        GetWeaponValues("Pistol");
     }
 
     private void Update()
