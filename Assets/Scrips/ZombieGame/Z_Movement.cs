@@ -46,6 +46,7 @@ public class Z_Movement : MonoBehaviour {
         Vector3 targetDir = (moveDirection+transform.position) - transform.position;
         float step = speed * Time.deltaTime*turnSpeed;
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow)) { newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F); }
+        
         Debug.DrawRay(transform.position, newDir, Color.red);
         //transform.rotation = Quaternion.LookRotation(newDir);
         PlayerRotation();
@@ -57,7 +58,7 @@ public class Z_Movement : MonoBehaviour {
         Vector3 dirrection = new Vector3((Input.mousePosition.x - c.pixelWidth / 2) / c.pixelWidth,0f,(Input.mousePosition.y - c.pixelHeight / 2) / c.pixelHeight);
         //print((Input.mousePosition.x - c.pixelWidth / 2) / c.pixelWidth + " " + (Input.mousePosition.y - c.pixelHeight / 2) / c.pixelHeight);
         //print(dirrection);
-        Vector3 test1 = Vector3.RotateTowards(transform.position, dirrection + transform.position, 20f*Time.deltaTime, 0.0F);
+        //Vector3 test1 = Vector3.RotateTowards(transform.position, dirrection + transform.position, 20f*Time.deltaTime, 0.0F);
         transform.LookAt(dirrection + transform.position);
     }
 

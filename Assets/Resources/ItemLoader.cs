@@ -4,14 +4,15 @@ using System.Collections;
 public class ItemLoader : MonoBehaviour {
 
     public const string path = "items";
+
 	// Use this for initialization
-	void GetWeaponValues() 
+	void Start () 
     {
         ItemContainer ic = ItemContainer.Load(path);
 
-        foreach (Item item in ic.items)
+        foreach (Item_wep item in ic.items)
         {
-            if(item.name == "Pistol") print("minShots: "+item.angle);
+            print(item.name);
         }
 	}
 	

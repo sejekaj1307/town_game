@@ -3,7 +3,8 @@ using System.Collections;
 using System.Xml;
 using System.Xml.Serialization;
 
-public class Item {
+public class Item_wep
+{
 
     [XmlAttribute("name")]
     public string name;
@@ -28,4 +29,5 @@ public class Item {
 
     [XmlElement("Angle")]
     public float angle;
+
 }

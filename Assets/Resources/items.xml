@@ -4,46 +4,28 @@
     <Item name="Pistol">
       <Damage>1</Damage>
       <range>0.4</range>
+      <Cycle>1</Cycle>
       <minShots>1</minShots>
       <maxShots>1</maxShots>
-      <Cycle>1</Cycle>
-      <Interval>0.1</Interval>
+      <interval>0.1</interval>
       <Angle>0</Angle>
     </Item>
     <Item name="Shotgun">
       <Damage>2</Damage>
       <range>0.3</range>
+      <Cycle>1</Cycle>
       <minShots>3</minShots>
       <maxShots>3</maxShots>
-      <Cycle>1</Cycle>
-      <Interval>0.1</Interval>
+      <interval>0.1</interval>
       <Angle>20</Angle>
     </Item>
-    <Item name="Sawed_Off">
-      <Damage>2</Damage>
-      <range>0.3</range>
-      <minShots>3</minShots>
-      <maxShots>3</maxShots>
-      <Cycle>1</Cycle>
-      <Interval>0.1</Interval>
-      <Angle>20</Angle>
-    </Item>
-    <Item nam ="Desert_Eagle">
+    <Item name="Dessert_Eagle">
       <Damage>2</Damage>
       <range>0.4</range>
-      <minShots>1</minShots>
-      <maxShots>1</maxShots>
       <Cycle>1</Cycle>
-      <Interval>0.1</Interval>
-      <Angle>0</Angle>
-    </Item>
-    <Item name ="Clock">
-      <Damage>1</Damage>
-      <range>0.4</range>
       <minShots>1</minShots>
       <maxShots>1</maxShots>
-      <Cycle>3</Cycle>
-      <Interval>0.1</Interval>
+      <interval>0.1</interval>
       <Angle>0</Angle>
     </Item>
   </Items>

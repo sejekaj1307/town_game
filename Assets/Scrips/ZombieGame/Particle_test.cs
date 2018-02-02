@@ -8,39 +8,35 @@ public class Particle_test : MonoBehaviour
     public Transform pos;
     public const string path = "items";
 
-    //private 
-    ParticleSystem ps;
-
-    // these lists are used to contain the particles which match
-    // the trigger conditions each frame.
-    List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
-    List<ParticleSystem.Particle> exit = new List<ParticleSystem.Particle>();
+    private ParticleSystem ps;
 
     void OnEnable()
     {
         ps = GetComponent<ParticleSystem>();
         ps.Stop();
-        GetWeaponValues("Pistol");
+        GetWeaponValues("Shotgun"); //OBS! if "shotgun" set transform.rotation *= Quaternion.Euler(0f,-20f,0f); 
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonUp(0)) { ps.Play(); }
         transform.rotation = player.rotation;
+        
         //old chef
         //transform.position = player.position + Vector3.Scale(player.forward,new Vector3(0.5f,0f,0.5f)) + new Vector3(0f,0.5f,0f);
 
         //new chef
         transform.position = pos.position;
+        transform.rotation *= Quaternion.Euler(0f, -20f, 0f);
     }
 
     void GetWeaponValues(string weapon)
     {
         ItemContainer ic = ItemContainer.Load(path);
 
-        foreach (Item item in ic.items)
+        foreach (Item_wep item in ic.items)
         {
-            if (item.name == weapon) WeaponType(item.cycle, item.minShots, item.maxShots, item.interval, item.angle,item.range); ;
+            if (item.name == weapon) WeaponType(item.cycle, item.minShots, item.maxShots, item.interval, item.angle,item.range);
         }
         
     }
