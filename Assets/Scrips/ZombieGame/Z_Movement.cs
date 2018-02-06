@@ -4,6 +4,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Z_Movement : MonoBehaviour {
+    public LayerMask interactionMask;
+    Camera cam;
+
+    public delegate void OnFocusChanged(Interactable newFocus);
+    public OnFocusChanged onFocusChangedCallback;
+
+    public Interactable focus;	// Our current focus: Item, Enemy etc.
+
+    public float life = 10;
+    public float maxHealth;
+
     public float speed = 6.0F;
     public float turnSpeed = 10F;
     public float jumpSpeed = 100F;
@@ -15,17 +26,58 @@ public class Z_Movement : MonoBehaviour {
     float x_in;
     float z_in;
 
+
+
     public float offset = 0.0f;
 
     void Start()
     {
+        maxHealth = life;
         rb = GetComponent<Rigidbody>();
+        cam = Camera.main;
     }
     void Update () {
         move();
         if (transform.position.y < -0.05) transform.position = new Vector3(transform.position.x,-0.045f,transform.position.z);
-        
-	}
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            // Shoot out a ray
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            // If we hit
+            if (Physics.Raycast(ray, out hit, 100f, interactionMask))
+            {
+                SetFocus(hit.collider.GetComponent<Interactable>());
+            }
+        }
+    }
+
+
+    void SetFocus(Interactable newFocus)
+    {
+        if (onFocusChangedCallback != null)
+            onFocusChangedCallback.Invoke(newFocus);
+
+        // If our focus has changed
+        if (focus != newFocus && focus != null)
+        {
+            // Let our previous focus know that it's no longer being focused
+            focus.OnDefocused();
+        }
+
+        // Set our focus to what we hit
+        // If it's not an interactable, simply set it to null
+        focus = newFocus;
+
+        if (focus != null)
+        {
+            // Let our focus know that it's being focused
+            focus.OnFocused(transform);
+        }
+
+    }
 
     void move()
     {
@@ -70,4 +122,11 @@ public class Z_Movement : MonoBehaviour {
         }
     }
 
+    public void Heal(int healthGain)
+    {
+        if (life + healthGain <= maxHealth)
+            life += healthGain;
+        else
+            life = maxHealth;
+    }
 }
