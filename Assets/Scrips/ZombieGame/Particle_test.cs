@@ -14,7 +14,6 @@ public class Particle_test : MonoBehaviour
     {
         ps = GetComponent<ParticleSystem>();
         ps.Stop();
-        GetWeaponValues("Shotgun"); //OBS! if "shotgun" set transform.rotation *= Quaternion.Euler(0f,-20f,0f); 
     }
 
     private void Update()
@@ -23,26 +22,16 @@ public class Particle_test : MonoBehaviour
         transform.rotation = player.rotation;
         
         //old chef
-        //transform.position = player.position + Vector3.Scale(player.forward,new Vector3(0.5f,0f,0.5f)) + new Vector3(0f,0.5f,0f);
+        transform.position = player.position + Vector3.Scale(player.forward,new Vector3(0.5f,0f,0.5f)) + new Vector3(0f,0.5f,0f);
 
         //new chef
-        transform.position = pos.position;
-        transform.rotation *= Quaternion.Euler(0f, -20f, 0f);
-    }
-
-    void GetWeaponValues(string weapon)
-    {
-        ItemContainer ic = ItemContainer.Load(path);
-
-        foreach (Item_wep item in ic.items)
-        {
-            if (item.name == weapon) WeaponType(item.cycle, item.minShots, item.maxShots, item.interval, item.angle,item.range);
-        }
-        
+        //transform.position = pos.position;
+        //transform.rotation *= Quaternion.Euler(0f, -20f, 0f);
     }
 
 
-    private void WeaponType(int cycles,short minShots,short maxShots,float interval,float angle,float range)
+
+    public void WeaponType(int cycles,short minShots,short maxShots,float interval,float angle,float range)
     {
         var shape = ps.shape;
         var main = ps.main;

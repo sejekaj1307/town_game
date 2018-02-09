@@ -10,8 +10,10 @@ public class lineRendere : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         laserLine = GetComponent<LineRenderer>();
-        laserLine.SetWidth(width, width);
-	}
+        //laserLine.SetWidth(width, width);
+        laserLine.startWidth = width;
+        laserLine.endWidth = width;
+    }
 	
 	// Update is called once per frame
 	void Update () {

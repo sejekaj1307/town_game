@@ -98,7 +98,7 @@ public class Z_Movement : MonoBehaviour {
         Vector3 targetDir = (moveDirection+transform.position) - transform.position;
         float step = speed * Time.deltaTime*turnSpeed;
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow)) { newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F); }
-        
+
         Debug.DrawRay(transform.position, newDir, Color.red);
         //transform.rotation = Quaternion.LookRotation(newDir);
         PlayerRotation();

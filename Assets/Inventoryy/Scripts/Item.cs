@@ -9,8 +9,9 @@ public class Item : ScriptableObject {
 	public Sprite icon = null;				// Item icon
 	public bool showInInventory = true;
 
-	// Called when the item is pressed in the inventory
-	public virtual void Use ()
+
+    // Called when the item is pressed in the inventory
+    public virtual void Use ()
 	{
 		// Use the item
 		// Something may happen
