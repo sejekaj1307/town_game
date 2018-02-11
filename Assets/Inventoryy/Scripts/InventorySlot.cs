@@ -9,14 +9,18 @@ public class InventorySlot : MonoBehaviour {
 
 	public Image icon;
 	public Button removeButton;
+    public Image dublikateIcon;
+    public Text dublikateText;
 
-	Item item;	// Current item in the slot
+	public Item item;	// Current item in the slot
+
+   // public int stack = 1;
 
 	// Add item to the slot
 	public void AddItem (Item newItem)
 	{
 		item = newItem;
-
+        
 		icon.sprite = item.icon;
 		icon.enabled = true;
 		removeButton.interactable = true;
@@ -25,18 +29,30 @@ public class InventorySlot : MonoBehaviour {
 	// Clear the slot
 	public void ClearSlot ()
 	{
-		item = null;
+            item = null;
 
-		icon.sprite = null;
-		icon.enabled = false;
-		removeButton.interactable = false;
+            icon.sprite = null;
+            icon.enabled = false;
+            removeButton.interactable = false;
+
+    
 	}
 
 	// If the remove button is pressed, this function will be called.
 	public void RemoveItemFromInventory ()
 	{
-		Inventory.instance.Remove(item);
-	}
+        print(item.stack);
+        if (item.stack == 1 || !item.canStack)
+        {
+            dublikateIcon.gameObject.SetActive(false);
+            Inventory.instance.Remove(item);
+        }
+        else
+        {
+            item.stack -= 2;
+            dublikate();
+       }
+    }
 
 	// Use the item
 	public void UseItem ()
@@ -46,5 +62,14 @@ public class InventorySlot : MonoBehaviour {
 			item.Use();
 		}
 	}
+
+    public void dublikate()
+    {
+        item.stack++;
+        if(!dublikateIcon.gameObject.active)
+            dublikateIcon.gameObject.SetActive(true);
+        if (item.stack == 1) dublikateIcon.gameObject.SetActive(false);
+        dublikateText.text = ""+item.stack;
+    }
 
 }

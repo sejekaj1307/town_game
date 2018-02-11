@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Weapons : Item {
     public GameObject Weapon = null;
     public Vector3 WeaponOffset;
+    public Vector3 ParticalOffset;
     public Sprite icon1 = null;
 
     //Weapon values
@@ -25,18 +26,21 @@ public class Weapons : Item {
         GameObject[] test = GameObject.FindGameObjectsWithTag("FireWeapon_Particle");
         Particle_test par_test = test[0].GetComponent<Particle_test>();
         par_test.WeaponType(cycle, minShots, maxShots, interval, angle, range);
+        par_test.offset = ParticalOffset;
 
         //Find the WeaponSlot and change the equiped weapon
         GameObject[] test2 = GameObject.FindGameObjectsWithTag("Weapon_Sprite");
         WeaonSlot wep = test2[0].GetComponent<WeaonSlot>();
-        wep.ChangeWeapon(this);
-
+        wep.ChangeWeapon(this,WeaponOffset,Weapon);
+        
         /*GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
         Debug.Log(player.Length);
         GameObject spawnedWep = Instantiate(Weapon,player[0].transform.position + WeaponOffset, player[0].transform.rotation);
         spawnedWep.transform.parent = player[0].transform;
-        */    
-    
+        spawnedWep.tag = "Weapon";
+        spawnedWep.transform.eulerAngles = new Vector3(spawnedWep.transform.eulerAngles.x, 248f, spawnedWep.transform.eulerAngles.z);
+        */
+
         Debug.Log(name + " Weapon clicked!");
 
         RemoveFromInventory();  // Remove the item after use

@@ -8,6 +8,8 @@ public class Item : ScriptableObject {
 	new public string name = "New Item";	// Name of the item
 	public Sprite icon = null;				// Item icon
 	public bool showInInventory = true;
+    public int stack = 1;
+    public bool canStack;
 
 
     // Called when the item is pressed in the inventory

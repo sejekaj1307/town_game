@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: bb5937f9f9b3f834f98582c763da7e5a
-timeCreated: 1517000211
+guid: d02f46c8a0ab82c46b715de5cd8727ff
+timeCreated: 1518301538
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: scene_fall
+    100000: pistol
     100002: //RootNode
-    400000: scene_fall
+    400000: pistol
     400002: //RootNode
-    2300000: scene_fall
-    3300000: scene_fall
-    4300000: scene_fall
+    2300000: pistol
+    3300000: pistol
+    4300000: pistol
   materials:
     importMaterials: 1
     materialName: 0
@@ -38,7 +38,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

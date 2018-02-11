@@ -42,9 +42,24 @@ public class InventoryUI : MonoBehaviour {
 				slots[i].AddItem(inventory.items[i]);
 			} else
 			{
-				slots[i].ClearSlot();
+			    slots[i].ClearSlot();
 			}
-		}
+
+            if (inventory.dublikate != "" && inventory.items[i].canStack)
+            {
+                print("working!?");
+                print(inventory.dublikate);
+
+                if (slots[i].item.name == inventory.dublikate)
+                {
+                    print(i);
+                    slots[i].dublikate();   
+                    inventory.dublikate = "";
+                }
+            }
+        }
+
+        
 	}
 
 }
